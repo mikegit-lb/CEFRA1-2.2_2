@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEFR A1 / A2 / A2+ English Placement Test</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --primary-light: #eeebff;
+            --secondary: #0ea5e9;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --success-light: #ecfdf5;
+            --error: #ef4444;
+            --error-light: #fef2f2;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            color: #ffffff;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--primary);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #e0e7ff;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 16px;
+            backdrop-filter: blur(4px);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        header p {
+            color: #c7d2fe;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: -30px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Navigation Tabs */
+        .tabs {
+            display: flex;
+            background: var(--bg-card);
+            padding: 8px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .tabs::-webkit-scrollbar {
+            display: none; /* Safari and Chrome */
+        }
+
+        .tab-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px 20px;
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .tab-btn.active {
+            color: #ffffff;
+            background: var(--primary);
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
+        }
+
+        /* Test Sections */
+        .test-section {
+            display: none;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .test-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-top: 6px;
+        }
+
+        /* Exercise Containers */
+        .exercise-block {
+            margin-bottom: 40px;
+        }
+
+        .exercise-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Question Cards */
+        .question-card {
+            background: var(--bg-page);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .question-card:hover {
+            border-color: #cbd5e1;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .question-text {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 14px;
+            color: var(--text-dark);
+        }
+
+        .question-text span.gap {
+            border-bottom: 2px dashed var(--primary);
+            padding: 0 15px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Form Controls */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .option-label input[type="radio"] {
+            margin-right: 12px;
+            accent-color: var(--primary);
+            width: 18px;
+            height: 18px;
+        }
+
+        .option-label:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .option-label.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            font-weight: 500;
+        }
+
+        /* Gap Fill Input */
+        .gap-input {
+            width: 200px;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--primary);
+            font-weight: 600;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .gap-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+        }
+
+        /* Sentence Unscramble */
+        .unscramble-word-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .word-pill {
+            background: #e2e8f0;
+            color: var(--text-dark);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            user-select: none;
+        }
+
+        .sentence-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .sentence-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+        }
+
+        /* Reading Comprehension */
+        .reading-passage {
+            background: #fafafa;
+            border-left: 4px solid var(--primary);
+            padding: 24px;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #334155;
+        }
+
+        .reading-passage p {
+            margin-bottom: 16px;
+        }
+
+        .reading-passage p:last-child {
+            margin-bottom: 0;
+        }
+
+        .level-indicator {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .tf-grid {
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .text-answer {
+            width: 100%;
+            height: 80px;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .text-answer:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+        }
+
+        /* Speaking Section Styles */
+        .speaking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .speaking-card {
+            background: var(--bg-page);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .speaking-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #cbd5e1;
+            opacity: 0.4;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .speaking-category {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .speaking-prompt {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            padding-right: 30px;
+        }
+
+        .speaking-action {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .suggested-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-light);
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .suggested-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .suggested-answer {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            background: #ffffff;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--secondary);
+            display: none;
+        }
+
+        /* Writing Section Styles */
+        .writing-prompt-box {
+            background: var(--primary-light);
+            border: 1px solid rgba(79, 70, 229, 0.1);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin-bottom: 30px;
+        }
+
+        .writing-prompt-box h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .writing-clues {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .writing-clues li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .writing-textarea {
+            width: 100%;
+            height: 250px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .writing-textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+        }
+
+        .word-counter {
+            text-align: right;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 8px;
+        }
+
+        /* Navigation Actions */
+        .action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-light);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text-dark);
+            color: var(--text-dark);
+            background: #f1f5f9;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-success {
+            background: var(--success);
+            border: none;
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        /* Modal & Results Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            animation: modalScale 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        @keyframes modalScale {
+            from { transform: scale(0.9) translateY(20px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .result-score-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            border: 4px solid var(--primary);
+        }
+
+        .score-val {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .score-lbl {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-top: 4px;
+        }
+
+        .recommended-level {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .level-desc {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        /* Result Classes for Questions */
+        .correct-answer {
+            border-color: var(--success) !important;
+            background-color: var(--success-light) !important;
+        }
+
+        .incorrect-answer {
+            border-color: var(--error) !important;
+            background-color: var(--error-light) !important;
+        }
+
+        .validation-message {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .correct-message {
+            color: var(--success);
+        }
+
+        .incorrect-message {
+            color: var(--error);
+        }
+
+        .feedback-label {
+            display: block;
+            margin-top: 10px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: #ffffff;
+                color: #000000;
+                padding-bottom: 0;
+            }
+            header {
+                background: none;
+                color: #000000;
+                border-bottom: 2px solid #000000;
+                padding: 20px 0;
+            }
+            header p, .badge {
+                color: #000000;
+            }
+            .tabs, .action-bar, .suggested-btn, .modal-overlay {
+                display: none !important;
+            }
+            .test-section {
+                display: block !important;
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+                margin-bottom: 50px !important;
+                page-break-after: always;
+            }
+            .container {
+                margin-top: 20px !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+            }
+            .question-card {
+                page-break-inside: avoid;
+                border: 1px solid #94a3b8 !important;
+                background: #ffffff !important;
+            }
+            .option-label {
+                border: 1px solid #cbd5e1 !important;
+                background: #ffffff !important;
+            }
+            .reading-passage {
+                background: #f8fafc !important;
+                border: 1px solid #cbd5e1 !important;
+                border-left: 4px solid #000000 !important;
+            }
+            .speaking-grid {
+                grid-template-columns: 1fr !important;
+            }
+            .writing-textarea {
+                border: 1px solid #000000 !important;
+                height: 400px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <span class="badge">CEFR Placement Assessment</span>
+            <h1>CEFR A1 / A2 / A2+ Level Test</h1>
+            <p>Evaluate grammar, reading, speaking, and writing competencies in one structured, interactive tool.</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Navigation Tabs -->
+        <nav class="tabs">
+            <button class="tab-btn active" onclick="switchTab('grammar')">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+                Grammar (30)
+            </button>
+            <button class="tab-btn" onclick="switchTab('reading')">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Reading (2 Passages)
+            </button>
+            <button class="tab-btn" onclick="switchTab('speaking')">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                </svg>
+                Speaking (15 Questions)
+            </button>
+            <button class="tab-btn" onclick="switchTab('writing')">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+                Writing (1 Task)
+            </button>
+        </nav>
+
+        <!-- GRAMMAR SECTION -->
+        <section id="grammar" class="test-section active">
+            <div class="section-header">
+                <h2>Grammar Exercises</h2>
+                <p>Complete the multiple choice questions, gap-fills, and sentence builders covering basic to intermediate CEFR tenses and syntax.</p>
+            </div>
+
+            <!-- Part 1: Multiple Choice Questions (10 Questions) -->
+            <div class="exercise-block">
+                <div class="exercise-title">
+                    <span>Part 1: Multiple Choice Questions</span>
+                </div>
+
+                <!-- Q1: Present Simple -->
+                <div class="question-card" id="q-1">
+                    <div class="question-text">1. Every morning, Sarah <span class="gap">_______</span> her email before starting work.</div>
+                    <div class="options-grid">
+                        <label class="option-label"><input type="radio" name="g-q1" value="A"> A. check</label>
+                        <label class="option-label"><input type="radio" name="g-q1" value="B"> B. checks</label>
+                        <label class="option-label"><input type="radio" name="g-q1" value="C"> C. checking</label>
+                        <label class="option-label"><input type="radio" name="g-q1" value="D"> D. checked</label>
+                    </div>
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q2: Present Continuous -->
+                <div class="question-card" id="q-2">
+                    <div class="question-text">2. Shh! Please be quiet, the baby <span class="gap">_______</span> right now.</div>
+                    <div class="options-grid">
+                        <label class="option-label"><input type="radio" name="g-q2" value="A"> A. sleeps</label>
+                        <label class="option-label"><input type="radio" name="g-q2" value="B"> B. is sleeping</label>
+                        <label class="option-label"><input type="radio" name="g-q2" value="C"> C. slept</label>
+                        <label class="option-label"><input type="radio" name="g-q2" value="D"> D. will sleep</label>
+                    </div>
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q3: Past Simple -->
+                <div class="question-card" id="q-3">
+                    <div class="question-text">3. They <span class="gap">_______</span> to Spain for their summer vacation last year.</div>
+                    <div class="options-grid">
+                        <label class="option-label"><input type="radio" name="g-q3" value="A"> A. go</label>
+                        <label class="option-label"><input type="radio" name="g-q3" value="B"> B. goes</label>
+                        <label class="option-label"><input type="radio" name="g-q3" value="C"> C. went</label>
+                        <label class="option-label"><input type="radio" name="g-q3" value="D"> D. gone</label>
+                    </div>
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q4: Past Simple (Negation) -->
+                <div class="question-card" id="q-4">
+                    <div class="question-text">4. I <span class="gap">_______</span> the movie last night because I was too tired.</div>
+                    <div class="options-grid">
+                        <label class="option-label"><input type="radio" name="g-q4" value="A"> A. didn't watch</label>
+                        <label class="option-label"><input type="radio" name="g-q4" value="B"> B. didn't watched</label>
+                        <label class="option-label"><input type="radio" name="g-q4" value="C"> C. don't watch</label>
+                        <label class="option-label"><input type="radio" name="g-q4" value="D"> D. wasn't watch</label>
+                    </div>
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q5: Will vs Be Going To -->
+                <div class="question-card" id="q-5">
+                    <div class="question-text">5. Look at those dark clouds! It <span class="gap">_______</span> rain very soon.</div>
+                    <div class="options-grid">
+                        <label class="option-label"><input type="radio" name="g-q5" value="A"> A. is going to</label>
+                        <label class="option-label"><input type="radio" name="g-q5" value="B"> B. will</label>
+                        <label class="option-label"><input type="radio" name="g-q5" value="C"> C. goes to</label>
+                        <label class="option-label"><input type="radio" name="g-q5" value="D"> D. is raining</label>
+                    </div>
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q6: Will (Offer/Decision) -->
+                <div class="question-card" id="q-6">
+                    <div class="question-text">6. "This bag is really heavy!" - "Don't worry, I <span class="gap">_______</span> help you carry it."</div>
+                    <div class="options-grid">
+                        <label class="option-label"><input type="radio" name="g-q6" value="A"> A. am going to</label>
+                        <label class="option-label"><input type="radio" name="g-q6" value="B"> B. will</label>
+                        <label class="option-label"><input type="radio" name="g-q6" value="C"> C. help</label>
+                        <label class="option-label"><input type="radio" name="g-q6" value="D"> D. should</label>
+                    </div>
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q7: Comparatives -->
+                <div class="question-card" id="q-7">
+                    <div class="question-text">7. A plane is <span class="gap">_______</span> than a train.</div>
+                    <div class="options-grid">
+                        <label class="option-label"><input type="radio" name="g-q7" value="A"> A. fast</label>
+                        <label class="option-label"><input type="radio" name="g-q7" value="B"> B. faster</label>
+                        <label class="option-label"><input type="radio" name="g-q7" value="C"> C. more fast</label>
+                        <label class="option-label"><input type="radio" name="g-q7" value="D"> D. fastest</label>
+                    </div>
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q8: Superlatives -->
+                <div class="question-card" id="q-8">
+                    <div class="question-text">8. Mount Everest is the <span class="gap">_______</span> mountain in the world.</div>
+                    <div class="options-grid">
+                        <label class="option-label"><input type="radio" name="g-q8" value="A"> A. high</label>
+                        <label class="option-label"><input type="radio" name="g-q8" value="B"> B. higher</label>
+                        <label class="option-label"><input type="radio" name="g-q8" value="C"> C. highest</label>
+                        <label class="option-label"><input type="radio" name="g-q8" value="D"> D. most high</label>
+                    </div>
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q9: Modals (should) -->
+                <div class="question-card" id="q-9">
+                    <div class="question-text">9. You look very pale and sick. You <span class="gap">_______</span> see a doctor.</div>
+                    <div class="options-grid">
+                        <label class="option-label"><input type="radio" name="g-q9" value="A"> A. must to</label>
+                        <label class="option-label"><input type="radio" name="g-q9" value="B"> B. should</label>
+                        <label class="option-label"><input type="radio" name="g-q9" value="C"> C. can</label>
+                        <label class="option-label"><input type="radio" name="g-q9" value="D"> D. have</label>
+                    </div>
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q10: Modals (must) -->
+                <div class="question-card" id="q-10">
+                    <div class="question-text">10. Drivers <span class="gap">_______</span> stop when the traffic light turns red. It is a strict law.</div>
+                    <div class="options-grid">
+                        <label class="option-label"><input type="radio" name="g-q10" value="A"> A. should</label>
+                        <label class="option-label"><input type="radio" name="g-q10" value="B"> B. can</label>
+                        <label class="option-label"><input type="radio" name="g-q10" value="C"> C. must</label>
+                        <label class="option-label"><input type="radio" name="g-q10" value="D"> D. don't have to</label>
+                    </div>
+                    <div class="validation-message"></div>
+                </div>
+            </div>
+
+            <!-- Part 2: Fill in the Gaps (15 Questions) -->
+            <div class="exercise-block">
+                <div class="exercise-title">
+                    <span>Part 2: Fill in the Gaps with the Correct Verb/Adjective Form</span>
+                </div>
+                <p style="margin-bottom: 20px; color: var(--text-light); font-size: 0.9rem;">Write your answer in the space provided. Make sure to use correct spelling and capitalization (lowercase preferred unless starting a sentence).</p>
+
+                <!-- Q11: Present Simple -->
+                <div class="question-card" id="q-11">
+                    <div class="question-text">11. My brother <span class="gap">_______</span> (not like) broccoli or green vegetables.</div>
+                    <input type="text" class="gap-input" data-answer="doesn't like" placeholder="Write answer here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q12: Present Continuous -->
+                <div class="question-card" id="q-12">
+                    <div class="question-text">12. At the moment, they <span class="gap">_______</span> (play) football in the school yard.</div>
+                    <input type="text" class="gap-input" data-answer="are playing" placeholder="Write answer here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q13: Present Simple vs Present Continuous -->
+                <div class="question-card" id="q-13">
+                    <div class="question-text">13. She usually drinks coffee, but today she <span class="gap">_______</span> (drink) herbal tea.</div>
+                    <input type="text" class="gap-input" data-answer="is drinking" placeholder="Write answer here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q14: Present Simple (to be) -->
+                <div class="question-card" id="q-14">
+                    <div class="question-text">14. Why <span class="gap">_______</span> (be) you so angry with your classmate yesterday?</div>
+                    <input type="text" class="gap-input" data-answer="were" placeholder="Write answer here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q15: Past Simple (Regular Verb) -->
+                <div class="question-card" id="q-15">
+                    <div class="question-text">15. Yesterday, we <span class="gap">_______</span> (visit) our grandparents in the countryside.</div>
+                    <input type="text" class="gap-input" data-answer="visited" placeholder="Write answer here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q16: Past Simple (Irregular Verb) -->
+                <div class="question-card" id="q-16">
+                    <div class="question-text">16. Last Sunday, I <span class="gap">_______</span> (write) a long letter to my pen pal.</div>
+                    <input type="text" class="gap-input" data-answer="wrote" placeholder="Write answer here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q17: Past Simple (Negative Irregular) -->
+                <div class="question-card" id="q-17">
+                    <div class="question-text">17. They <span class="gap">_______</span> (not buy) the house last month because it was too expensive.</div>
+                    <input type="text" class="gap-input" data-answer="didn't buy" placeholder="Write answer here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q18: Past Simple (Question) -->
+                <div class="question-card" id="q-18">
+                    <div class="question-text">18. <span class="gap">_______</span> (do) you finish your English homework last night?</div>
+                    <input type="text" class="gap-input" data-answer="Did" placeholder="Write answer here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q19: Will (Prediction) -->
+                <div class="question-card" id="q-19">
+                    <div class="question-text">19. In the future, I think flying cars <span class="gap">_______</span> (exist) in every city.</div>
+                    <input type="text" class="gap-input" data-answer="will exist" placeholder="Write answer here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q20: Be Going To (Intent/Plan) -->
+                <div class="question-card" id="q-20">
+                    <div class="question-text">20. We have bought the tickets. We <span class="gap">_______</span> (see) the new movie this Saturday.</div>
+                    <input type="text" class="gap-input" data-answer="are going to see" placeholder="Write answer here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q21: Will vs Be Going To -->
+                <div class="question-card" id="q-21">
+                    <div class="question-text">21. I am cold. I <span class="gap">_______</span> (close) the window right now.</div>
+                    <input type="text" class="gap-input" data-answer="will close" placeholder="Write answer here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q22: Comparatives (Irregular) -->
+                <div class="question-card" id="q-22">
+                    <div class="question-text">22. I think learning English is <span class="gap">_______</span> (good) than learning Latin.</div>
+                    <input type="text" class="gap-input" data-answer="better" placeholder="Write answer here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q23: Superlatives (Long Adjective) -->
+                <div class="question-card" id="q-23">
+                    <div class="question-text">23. This is the <span class="gap">_______</span> (expensive) dress in the shop.</div>
+                    <input type="text" class="gap-input" data-answer="most expensive" placeholder="Write answer here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q24: Modals (should/advice) -->
+                <div class="question-card" id="q-24">
+                    <div class="question-text">24. It is starting to rain. We <span class="gap">_______</span> (take) an umbrella with us.</div>
+                    <input type="text" class="gap-input" data-answer="should take" placeholder="Write answer here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q25: Modals (cannot/ability) -->
+                <div class="question-card" id="q-25">
+                    <div class="question-text">25. When she was three years old, she <span class="gap">_______</span> (not write) her name yet.</div>
+                    <input type="text" class="gap-input" data-answer="could not" placeholder="Write answer here... (use past tense of can)">
+                    <div class="validation-message"></div>
+                </div>
+            </div>
+
+            <!-- Part 3: Build your own sentences (5 Questions) -->
+            <div class="exercise-block">
+                <div class="exercise-title">
+                    <span>Part 3: Sentence Builders (Unscramble the Sentences)</span>
+                </div>
+                <p style="margin-bottom: 20px; color: var(--text-light); font-size: 0.9rem;">Arrange the scrambled words to make grammatically correct sentences. Remember correct capitalization and punctuation.</p>
+
+                <!-- Q26: Present Simple Sentence Build -->
+                <div class="question-card" id="q-26">
+                    <div class="question-text">26. Unscramble:</div>
+                    <div class="unscramble-word-container">
+                        <span class="word-pill">goes</span>
+                        <span class="word-pill">she</span>
+                        <span class="word-pill">every</span>
+                        <span class="word-pill">to</span>
+                        <span class="word-pill">gym</span>
+                        <span class="word-pill">the</span>
+                        <span class="word-pill">Saturday.</span>
+                    </div>
+                    <input type="text" class="sentence-input" data-answer="She goes to the gym every Saturday." placeholder="Type your unscrambled sentence here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q27: Present Continuous Sentence Build -->
+                <div class="question-card" id="q-27">
+                    <div class="question-text">27. Unscramble:</div>
+                    <div class="unscramble-word-container">
+                        <span class="word-pill">are</span>
+                        <span class="word-pill">they</span>
+                        <span class="word-pill">why</span>
+                        <span class="word-pill">making</span>
+                        <span class="word-pill">much</span>
+                        <span class="word-pill">noise?</span>
+                        <span class="word-pill">so</span>
+                    </div>
+                    <input type="text" class="sentence-input" data-answer="Why are they making so much noise?" placeholder="Type your unscrambled sentence here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q28: Comparatives Sentence Build -->
+                <div class="question-card" id="q-28">
+                    <div class="question-text">28. Unscramble:</div>
+                    <div class="unscramble-word-container">
+                        <span class="word-pill">than</span>
+                        <span class="word-pill">cars</span>
+                        <span class="word-pill">motorcycles</span>
+                        <span class="word-pill">are</span>
+                        <span class="word-pill">safer</span>
+                        <span class="word-pill">usually.</span>
+                    </div>
+                    <input type="text" class="sentence-input" data-answer="Cars are usually safer than motorcycles." placeholder="Type your unscrambled sentence here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q29: Be Going To Sentence Build -->
+                <div class="question-card" id="q-29">
+                    <div class="question-text">29. Unscramble:</div>
+                    <div class="unscramble-word-container">
+                        <span class="word-pill">study</span>
+                        <span class="word-pill">are</span>
+                        <span class="word-pill">they</span>
+                        <span class="word-pill">university</span>
+                        <span class="word-pill">going</span>
+                        <span class="word-pill">at</span>
+                        <span class="word-pill">medicine.</span>
+                        <span class="word-pill">to</span>
+                    </div>
+                    <input type="text" class="sentence-input" data-answer="They are going to study medicine at university." placeholder="Type your unscrambled sentence here...">
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Q30: Modals Sentence Build -->
+                <div class="question-card" id="q-30">
+                    <div class="question-text">30. Unscramble:</div>
+                    <div class="unscramble-word-container">
+                        <span class="word-pill">must</span>
+                        <span class="word-pill">you</span>
+                        <span class="word-pill">forget</span>
+                        <span class="word-pill">keys</span>
+                        <span class="word-pill">not</span>
+                        <span class="word-pill">your</span>
+                        <span class="word-pill">take.</span>
+                        <span class="word-pill">to</span>
+                    </div>
+                    <input type="text" class="sentence-input" data-answer="You must not forget to take your keys." placeholder="Type your unscrambled sentence here...">
+                    <div class="validation-message"></div>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <div></div>
+                <button class="btn btn-primary" onclick="switchTab('reading')">
+                    Continue to Reading
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- READING SECTION -->
+        <section id="reading" class="test-section">
+            <div class="section-header">
+                <h2>Reading Comprehension</h2>
+                <p>Read the two passages below and answer the corresponding comprehension questions.</p>
+            </div>
+
+            <!-- Passage 1: A2 Level -->
+            <div class="exercise-block">
+                <div class="level-indicator">Level A2</div>
+                <h3 style="margin-bottom: 12px; font-size: 1.3rem;">Passage 1: A Day in the Life of a National Park Ranger</h3>
+                <div class="reading-passage">
+                    <p>Mark is a park ranger at a beautiful national park. He lives in a small cabin inside the forest. Every day, he wakes up very early, usually at 5:30 AM. First, he makes a cup of coffee and checks the weather report on his computer. Then, he starts his daily patrol.</p>
+                    <p>Mark loves his job because he likes being in nature. Yesterday, he walked over 15 kilometers. During his patrol, he helped a family of tourists who were lost. He showed them a map and gave them directions back to the parking lot. Later in the afternoon, he saw a mother bear and her cubs crossing the river. He stayed far away and took photos. Mark says, "Next week, I am going to teach a special class about forest safety for children. I think we should all protect the forest and keep it clean."</p>
+                </div>
+
+                <!-- Passage 1 Questions -->
+                <h4 style="margin-bottom: 16px;">Questions for Passage 1:</h4>
+
+                <!-- T/F 1 -->
+                <div class="question-card" id="r-q1">
+                    <div class="question-text">R1. True or False: Mark lives in a house in a nearby town.</div>
+                    <div class="tf-grid">
+                        <label class="option-label"><input type="radio" name="read-q1" value="True"> True</label>
+                        <label class="option-label"><input type="radio" name="read-q1" value="False"> False</label>
+                    </div>
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- T/F 2 -->
+                <div class="question-card" id="r-q2">
+                    <div class="question-text">R2. True or False: Mark helped some tourists find their way yesterday.</div>
+                    <div class="tf-grid">
+                        <label class="option-label"><input type="radio" name="read-q2" value="True"> True</label>
+                        <label class="option-label"><input type="radio" name="read-q2" value="False"> False</label>
+                    </div>
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- T/F 3 -->
+                <div class="question-card" id="r-q3">
+                    <div class="question-text">R3. True or False: Next week, Mark is going to teach forest safety to children.</div>
+                    <div class="tf-grid">
+                        <label class="option-label"><input type="radio" name="read-q3" value="True"> True</label>
+                        <label class="option-label"><input type="radio" name="read-q3" value="False"> False</label>
+                    </div>
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Open Question 1 -->
+                <div class="question-card" id="r-q4">
+                    <div class="question-text">R4. Why does Mark love his job as a national park ranger?</div>
+                    <textarea class="text-answer" placeholder="Type your answer using complete sentences..."></textarea>
+                    <span class="feedback-label">Sample Answer: He loves his job because he likes being in nature.</span>
+                </div>
+
+                <!-- Open Question 2 -->
+                <div class="question-card" id="r-q5">
+                    <div class="question-text">R5. What did Mark do when he saw the mother bear and her cubs?</div>
+                    <textarea class="text-answer" placeholder="Type your answer using complete sentences..."></textarea>
+                    <span class="feedback-label">Sample Answer: He stayed far away and took photos.</span>
+                </div>
+            </div>
+
+            <!-- Passage 2: A2+ Level -->
+            <div class="exercise-block" style="border-top: 1px solid var(--border); padding-top: 40px; margin-top: 40px;">
+                <div class="level-indicator">Level A2+</div>
+                <h3 style="margin-bottom: 12px; font-size: 1.3rem;">Passage 2: The Future of Eco-Tourism</h3>
+                <div class="reading-passage">
+                    <p>Travelling is easier and cheaper than it was in the past. Consequently, millions of people travel to remote and exotic locations every year. However, this high volume of tourists can cause severe damage to fragile ecosystems and local communities. This is why eco-tourism is becoming more popular than traditional holidays.</p>
+                    <p>Eco-tourism is a way of travelling that respects the environment. In an eco-tourist resort, guests must conserve water and should not waste electricity. Most eco-resorts are built with natural materials and use solar energy. Next summer, Lisa is going to visit an eco-lodge in Costa Rica. "I want to have a great vacation, but I also must make sure I don't hurt the rainforest," she explains. Experts believe that eco-tourism will become the most important segment of the travel industry in the next decade. If we want to keep our planet green, we must travel responsibly.</p>
+                </div>
+
+                <!-- Passage 2 Questions -->
+                <h4 style="margin-bottom: 16px;">Questions for Passage 2:</h4>
+
+                <!-- T/F 4 -->
+                <div class="question-card" id="r-q6">
+                    <div class="question-text">R6. True or False: Eco-tourism is less popular than traditional holidays in the text, but is growing rapidly.</div>
+                    <div class="tf-grid">
+                        <label class="option-label"><input type="radio" name="read-q6" value="True"> True</label>
+                        <label class="option-label"><input type="radio" name="read-q6" value="False"> False</label>
+                    </div>
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- T/F 5 -->
+                <div class="question-card" id="r-q7">
+                    <div class="question-text">R7. True or False: In eco-tourism resorts, guests can waste as much water as they want.</div>
+                    <div class="tf-grid">
+                        <label class="option-label"><input type="radio" name="read-q7" value="True"> True</label>
+                        <label class="option-label"><input type="radio" name="read-q7" value="False"> False</label>
+                    </div>
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- T/F 6 -->
+                <div class="question-card" id="r-q8">
+                    <div class="question-text">R8. True or False: Lisa is going to travel to an eco-resort in Costa Rica next summer.</div>
+                    <div class="tf-grid">
+                        <label class="option-label"><input type="radio" name="read-q8" value="True"> True</label>
+                        <label class="option-label"><input type="radio" name="read-q8" value="False"> False</label>
+                    </div>
+                    <div class="validation-message"></div>
+                </div>
+
+                <!-- Open Question 3 -->
+                <div class="question-card" id="r-q9">
+                    <div class="question-text">R9. What is different about the construction and energy sources of most eco-resorts compared to standard hotels?</div>
+                    <textarea class="text-answer" placeholder="Type your answer using complete sentences..."></textarea>
+                    <span class="feedback-label">Sample Answer: They are built with natural materials and use solar energy.</span>
+                </div>
+
+                <!-- Open Question 4 -->
+                <div class="question-card" id="r-q10">
+                    <div class="question-text">R10. What prediction do experts make about the future of the travel industry?</div>
+                    <textarea class="text-answer" placeholder="Type your answer using complete sentences..."></textarea>
+                    <span class="feedback-label">Sample Answer: Experts believe that eco-tourism will become the most important segment of the travel industry.</span>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <button class="btn btn-outline" onclick="switchTab('grammar')">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Grammar
+                </button>
+                <button class="btn btn-primary" onclick="switchTab('speaking')">
+                    Continue to Speaking
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- SPEAKING SECTION -->
+        <section id="speaking" class="test-section">
+            <div class="section-header">
+                <h2>Speaking Prompts</h2>
+                <p>Prepare oral answers for these 15 conversational questions. Click "Show Guide" to see suggested phrases and sentence structures.</p>
+            </div>
+
+            <div class="speaking-grid">
+                <!-- Group 1: Hobbies and Daily Life (5 questions) -->
+                <div class="speaking-card">
+                    <div class="speaking-number">01</div>
+                    <div class="speaking-category">Hobbies & Daily Life</div>
+                    <div class="speaking-prompt">What do you like doing in your free time, and why?</div>
+                    <div class="speaking-action">
+                        <button class="suggested-btn" onclick="toggleSuggested(this)">Show Guide</button>
+                    </div>
+                    <div class="suggested-answer">
+                        <strong>Try using:</strong> "In my free time, I love... because it makes me feel..." or "My favorite hobby is... because..."
+                    </div>
+                </div>
+
+                <div class="speaking-card">
+                    <div class="speaking-number">02</div>
+                    <div class="speaking-category">Hobbies & Daily Life</div>
+                    <div class="speaking-prompt">How often do you exercise or play sports? Describe your routine.</div>
+                    <div class="speaking-action">
+                        <button class="suggested-btn" onclick="toggleSuggested(this)">Show Guide</button>
+                    </div>
+                    <div class="suggested-answer">
+                        <strong>Try using:</strong> "I usually exercise once/twice a week..." or "I go for runs every Saturday..."
+                    </div>
+                </div>
+
+                <div class="speaking-card">
+                    <div class="speaking-number">03</div>
+                    <div class="speaking-category">Hobbies & Daily Life</div>
+                    <div class="speaking-prompt">Who do you spend your weekends with, and what do you do together?</div>
+                    <div class="speaking-action">
+                        <button class="suggested-btn" onclick="toggleSuggested(this)">Show Guide</button>
+                    </div>
+                    <div class="suggested-answer">
+                        <strong>Try using:</strong> "I normally spend my weekends with my family/friends..." or "We enjoy watching movies or eating out..."
+                    </div>
+                </div>
+
+                <div class="speaking-card">
+                    <div class="speaking-number">04</div>
+                    <div class="speaking-category">Hobbies & Daily Life</div>
+                    <div class="speaking-prompt">Describe a typical weekday in your life from morning to night.</div>
+                    <div class="speaking-action">
+                        <button class="suggested-btn" onclick="toggleSuggested(this)">Show Guide</button>
+                    </div>
+                    <div class="suggested-answer">
+                        <strong>Try using:</strong> "First, I wake up at... and have breakfast..." or "In the evening, I relax by watching..."
+                    </div>
+                </div>
+
+                <div class="speaking-card">
+                    <div class="speaking-number">05</div>
+                    <div class="speaking-category">Hobbies & Daily Life</div>
+                    <div class="speaking-prompt">What is your favorite book, movie, or song? Explain why you like it.</div>
+                    <div class="speaking-action">
+                        <button class="suggested-btn" onclick="toggleSuggested(this)">Show Guide</button>
+                    </div>
+                    <div class="suggested-answer">
+                        <strong>Try using:</strong> "My favorite book/movie is... because it is really exciting/beautiful..."
+                    </div>
+                </div>
+
+                <!-- Group 2: The Past (5 questions) -->
+                <div class="speaking-card">
+                    <div class="speaking-number">06</div>
+                    <div class="speaking-category">The Past</div>
+                    <div class="speaking-prompt">Where did you go for your last holiday? What did you do there?</div>
+                    <div class="speaking-action">
+                        <button class="suggested-btn" onclick="toggleSuggested(this)">Show Guide</button>
+                    </div>
+                    <div class="suggested-answer">
+                        <strong>Try using:</strong> "Last holiday, I went to... and I visited..." or "We stayed at a hotel and ate delicious food."
+                    </div>
+                </div>
+
+                <div class="speaking-card">
+                    <div class="speaking-number">07</div>
+                    <div class="speaking-category">The Past</div>
+                    <div class="speaking-prompt">Talk about a memorable celebration (like a birthday or festival) you attended.</div>
+                    <div class="speaking-action">
+                        <button class="suggested-btn" onclick="toggleSuggested(this)">Show Guide</button>
+                    </div>
+                    <div class="suggested-answer">
+                        <strong>Try using:</strong> "Last year, I celebrated my birthday by..." or "It was memorable because my friends threw a surprise party."
+                    </div>
+                </div>
+
+                <div class="speaking-card">
+                    <div class="speaking-number">08</div>
+                    <div class="speaking-category">The Past</div>
+                    <div class="speaking-prompt">Describe your first day at school or at your current job. How did you feel?</div>
+                    <div class="speaking-action">
+                        <button class="suggested-btn" onclick="toggleSuggested(this)">Show Guide</button>
+                    </div>
+                    <div class="suggested-answer">
+                        <strong>Try using:</strong> "On my first day, I felt very nervous, but the teachers/colleagues were very kind..."
+                    </div>
+                </div>
+
+                <div class="speaking-card">
+                    <div class="speaking-number">09</div>
+                    <div class="speaking-category">The Past</div>
+                    <div class="speaking-prompt">What did you eat for dinner yesterday? Did you cook it yourself?</div>
+                    <div class="speaking-action">
+                        <button class="suggested-btn" onclick="toggleSuggested(this)">Show Guide</button>
+                    </div>
+                    <div class="suggested-answer">
+                        <strong>Try using:</strong> "Yesterday evening, I had... My mother cooked it / I cooked it myself."
+                    </div>
+                </div>
+
+                <div class="speaking-card">
+                    <div class="speaking-number">10</div>
+                    <div class="speaking-category">The Past</div>
+                    <div class="speaking-prompt">Describe a game or toy you played with when you were a child.</div>
+                    <div class="speaking-action">
+                        <button class="suggested-btn" onclick="toggleSuggested(this)">Show Guide</button>
+                    </div>
+                    <div class="suggested-answer">
+                        <strong>Try using:</strong> "When I was young, my favorite toy was..." or "I used to play hide-and-seek with my friends."
+                    </div>
+                </div>
+
+                <!-- Group 3: Future Dreams (5 questions) -->
+                <div class="speaking-card">
+                    <div class="speaking-number">11</div>
+                    <div class="speaking-category">Future Dreams</div>
+                    <div class="speaking-prompt">What country would you like to visit in the future, and why?</div>
+                    <div class="speaking-action">
+                        <button class="suggested-btn" onclick="toggleSuggested(this)">Show Guide</button>
+                    </div>
+                    <div class="suggested-answer">
+                        <strong>Try using:</strong> "I would love to visit... because I want to see..." or "I am going to travel to..."
+                    </div>
+                </div>
+
+                <div class="speaking-card">
+                    <div class="speaking-number">12</div>
+                    <div class="speaking-category">Future Dreams</div>
+                    <div class="speaking-prompt">What job do you want to have in ten years?</div>
+                    <div class="speaking-action">
+                        <button class="suggested-btn" onclick="toggleSuggested(this)">Show Guide</button>
+                    </div>
+                    <div class="suggested-answer">
+                        <strong>Try using:</strong> "In ten years, I hope to work as a..." or "I want to build my own business in..."
+                    </div>
+                </div>
+
+                <div class="speaking-card">
+                    <div class="speaking-number">13</div>
+                    <div class="speaking-category">Future Dreams</div>
+                    <div class="speaking-prompt">Are you going to learn any new skills next year? (e.g., cooking, programming, music)</div>
+                    <div class="speaking-action">
+                        <button class="suggested-btn" onclick="toggleSuggested(this)">Show Guide</button>
+                    </div>
+                    <div class="suggested-answer">
+                        <strong>Try using:</strong> "Next year, I am going to start learning..." or "I should learn how to... because it is useful."
+                    </div>
+                </div>
+
+                <div class="speaking-card">
+                    <div class="speaking-number">14</div>
+                    <div class="speaking-category">Future Dreams</div>
+                    <div class="speaking-prompt">If you win the lottery, what will you buy first?</div>
+                    <div class="speaking-action">
+                        <button class="suggested-btn" onclick="toggleSuggested(this)">Show Guide</button>
+                    </div>
+                    <div class="suggested-answer">
+                        <strong>Try using:</strong> "If I win the lottery, I will buy a new house for my parents..." or "I will travel around the world."
+                    </div>
+                </div>
+
+                <div class="speaking-card">
+                    <div class="speaking-number">15</div>
+                    <div class="speaking-category">Future Dreams</div>
+                    <div class="speaking-prompt">How will your life be different when you are much older?</div>
+                    <div class="speaking-action">
+                        <button class="suggested-btn" onclick="toggleSuggested(this)">Show Guide</button>
+                    </div>
+                    <div class="suggested-answer">
+                        <strong>Try using:</strong> "When I am older, I think I will live in the countryside..." or "I will have more time to..."
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <button class="btn btn-outline" onclick="switchTab('reading')">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Reading
+                </button>
+                <button class="btn btn-primary" onclick="switchTab('writing')">
+                    Continue to Writing
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- WRITING SECTION -->
+        <section id="writing" class="test-section">
+            <div class="section-header">
+                <h2>Writing Exercise</h2>
+                <p>Complete the writing task below. Pay attention to vocabulary, spelling, and sentence structures.</p>
+            </div>
+
+            <div class="writing-prompt-box">
+                <h3>Task: Describe your biggest dream in life</h3>
+                <p>Write a paragraph of approximately <strong>80–120 words</strong>. Use the clues and prompt questions below to guide your writing.</p>
+                <ul class="writing-clues">
+                    <li><strong>What is your dream?</strong> (e.g., a career, a destination, a personal project, an achievement)</li>
+                    <li><strong>Why is this dream important to you?</strong></li>
+                    <li><strong>What are you going to do to make this dream come true?</strong> (use <em>be going to</em> or <em>will</em>)</li>
+                    <li><strong>Who will help you or share this dream with you?</strong></li>
+                </ul>
+                <p style="font-size: 0.85rem; color: var(--text-light); font-style: italic;">💡 Grammar check: Try to include at least one comparative/superlative sentence (e.g., "This is the most important goal for me") and a modal verb (e.g., "I must study hard").</p>
+            </div>
+
+            <textarea class="writing-textarea" id="writing-input" onkeyup="countWords()" placeholder="Write your paragraph here..."></textarea>
+            <div class="word-counter">Word Count: <span id="word-count">0</span> / 120 words</div>
+
+            <div class="action-bar" style="margin-top: 50px;">
+                <button class="btn btn-outline" onclick="switchTab('speaking')">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Speaking
+                </button>
+                <button class="btn btn-success" onclick="calculateResult()">
+                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Submit Test & Get Placement
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Placement Result Modal -->
+    <div class="modal-overlay" id="result-modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <h2 style="margin-bottom: 8px;">Your Evaluation Result</h2>
+            <p style="color: var(--text-light); margin-bottom: 24px;">Automated grading based on Grammar & Reading T/F inputs.</p>
+            
+            <div class="result-score-circle">
+                <span class="score-val" id="total-score">0</span>
+                <span class="score-lbl">Score (Max 36)</span>
+            </div>
+
+            <p style="font-size: 0.95rem; font-weight: 600; text-transform: uppercase; color: var(--text-light); margin-bottom: 4px;">Recommended Placement</p>
+            <div class="recommended-level" id="rec-level">A2 Level</div>
+            <p class="level-desc" id="rec-desc">You show a good command of simple past/present tenses and basic vocabulary. Ready for A2+ study.</p>
+
+            <div style="background: var(--bg-page); border: 1px solid var(--border); padding: 15px; border-radius: var(--radius-md); text-align: left; margin-bottom: 30px; font-size: 0.9rem;">
+                <strong style="display: block; margin-bottom: 6px; color: var(--text-dark);">Teacher Feedback Note:</strong>
+                <span style="color: var(--text-light);">Make sure to review the student's open-ended reading answers, speaking performance, and writing exercise to confirm final placement level.</span>
+            </div>
+
+            <button class="btn btn-primary" onclick="closeModal()" style="width: 100%; justify-content: center;">Review Test Answers</button>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.test-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            document.getElementById(tabId).classList.add('active');
+            
+            // Find matching tab button by checking its text or index
+            const tabsMap = { grammar: 0, reading: 1, speaking: 2, writing: 3 };
+            const index = tabsMap[tabId];
+            document.querySelectorAll('.tab-btn')[index].classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle Suggested speaking guides
+        function toggleSuggested(button) {
+            const answerDiv = button.parentElement.nextElementSibling;
+            if (answerDiv.style.display === 'block') {
+                answerDiv.style.display = 'none';
+                button.textContent = 'Show Guide';
+            } else {
+                answerDiv.style.display = 'block';
+                button.textContent = 'Hide Guide';
+            }
+        }
+
+        // Word count calculator
+        function countWords() {
+            const text = document.getElementById('writing-input').value.trim();
+            const words = text === '' ? 0 : text.split(/\s+/).length;
+            document.getElementById('word-count').textContent = words;
+        }
+
+        // Handle custom styling state for radio inputs
+        document.querySelectorAll('.option-label').forEach(label => {
+            const radio = label.querySelector('input[type="radio"]');
+            if (radio) {
+                radio.addEventListener('change', () => {
+                    // Unselect siblings
+                    const name = radio.getAttribute('name');
+                    document.querySelectorAll(`input[name="${name}"]`).forEach(siblingRadio => {
+                        siblingRadio.parentElement.classList.remove('selected');
+                    });
+                    if (radio.checked) {
+                        label.classList.add('selected');
+                    }
+                });
+            }
+        });
+
+        // Answer keys mapping
+        const grammarMCQKeys = {
+            'g-q1': 'B', // checks
+            'g-q2': 'B', // is sleeping
+            'g-q3': 'C', // went
+            'g-q4': 'A', // didn't watch
+            'g-q5': 'A', // is going to
+            'g-q6': 'B', // will
+            'g-q7': 'B', // faster
+            'g-q8': 'C', // highest
+            'g-q9': 'B', // should
+            'g-q10': 'C' // must
+        };
+
+        const readingTFKeys = {
+            'read-q1': 'False',
+            'read-q2': 'True',
+            'read-q3': 'True',
+            'read-q6': 'True',
+            'read-q7': 'False',
+            'read-q8': 'True'
+        };
+
+        function checkGrammarMCQ() {
+            let score = 0;
+            for (const [qId, correctVal] of Object.entries(grammarMCQKeys)) {
+                const questionNum = qId.replace('g-q', '');
+                const card = document.getElementById(`q-${questionNum}`);
+                const checkedOption = card.querySelector(`input[name="${qId}"]:checked`);
+                const valMsg = card.querySelector('.validation-message');
+                
+                // Clear state
+                card.classList.remove('correct-answer', 'incorrect-answer');
+                valMsg.style.display = 'none';
+
+                if (checkedOption) {
+                    if (checkedOption.value === correctVal) {
+                        score += 1;
+                        card.classList.add('correct-answer');
+                        valMsg.textContent = '✓ Correct';
+                        valMsg.className = 'validation-message correct-message';
+                        valMsg.style.display = 'block';
+                    } else {
+                        card.classList.add('incorrect-answer');
+                        valMsg.textContent = `✗ Incorrect. Correct: ${correctVal}`;
+                        valMsg.className = 'validation-message incorrect-message';
+                        valMsg.style.display = 'block';
+                    }
+                } else {
+                    card.classList.add('incorrect-answer');
+                    valMsg.textContent = `✗ Unanswered. Correct: ${correctVal}`;
+                    valMsg.className = 'validation-message incorrect-message';
+                    valMsg.style.display = 'block';
+                }
+            }
+            return score;
+        }
+
+        function checkGrammarGaps() {
+            let score = 0;
+            const gapInputs = document.querySelectorAll('.gap-input');
+            gapInputs.forEach(input => {
+                const card = input.parentElement;
+                const userVal = input.value.trim().toLowerCase();
+                const correctVal = input.getAttribute('data-answer').trim().toLowerCase();
+                const valMsg = card.querySelector('.validation-message');
+
+                card.classList.remove('correct-answer', 'incorrect-answer');
+                valMsg.style.display = 'none';
+
+                // Allow minor clean alternatives (e.g. "doesn't like" vs "does not like")
+                let isCorrect = (userVal === correctVal);
+                if (correctVal === "doesn't like" && userVal === "does not like") isCorrect = true;
+                if (correctVal === "didn't buy" && userVal === "did not buy") isCorrect = true;
+                if (correctVal === "could not" && userVal === "couldn't") isCorrect = true;
+
+                if (isCorrect) {
+                    score += 1;
+                    card.classList.add('correct-answer');
+                    valMsg.textContent = '✓ Correct';
+                    valMsg.className = 'validation-message correct-message';
+                    valMsg.style.display = 'block';
+                } else {
+                    card.classList.add('incorrect-answer');
+                    valMsg.textContent = `✗ Incorrect. Correct answer: "${input.getAttribute('data-answer')}"`;
+                    valMsg.className = 'validation-message incorrect-message';
+                    valMsg.style.display = 'block';
+                }
+            });
+            return score;
+        }
+
+        function checkSentenceBuilders() {
+            let score = 0;
+            const sentenceInputs = document.querySelectorAll('.sentence-input');
+            sentenceInputs.forEach(input => {
+                const card = input.parentElement;
+                const userVal = input.value.trim().replace(/\s+/g, ' ').toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"");
+                const correctVal = input.getAttribute('data-answer').trim().replace(/\s+/g, ' ').toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"");
+                const valMsg = card.querySelector('.validation-message');
+
+                card.classList.remove('correct-answer', 'incorrect-answer');
+                valMsg.style.display = 'none';
+
+                if (userVal === correctVal) {
+                    score += 1;
+                    card.classList.add('correct-answer');
+                    valMsg.textContent = '✓ Correct';
+                    valMsg.className = 'validation-message correct-message';
+                    valMsg.style.display = 'block';
+                } else {
+                    card.classList.add('incorrect-answer');
+                    valMsg.textContent = `✗ Incorrect. Sample correct order: "${input.getAttribute('data-answer')}"`;
+                    valMsg.className = 'validation-message incorrect-message';
+                    valMsg.style.display = 'block';
+                }
+            });
+            return score;
+        }
+
+        function checkReadingTF() {
+            let score = 0;
+            for (const [qId, correctVal] of Object.entries(readingTFKeys)) {
+                const card = document.getElementById(qId.replace('read-', 'r-'));
+                const checkedOption = card.querySelector(`input[name="${qId}"]:checked`);
+                const valMsg = card.querySelector('.validation-message');
+
+                card.classList.remove('correct-answer', 'incorrect-answer');
+                valMsg.style.display = 'none';
+
+                if (checkedOption) {
+                    if (checkedOption.value === correctVal) {
+                        score += 1;
+                        card.classList.add('correct-answer');
+                        valMsg.textContent = '✓ Correct';
+                        valMsg.className = 'validation-message correct-message';
+                        valMsg.style.display = 'block';
+                    } else {
+                        card.classList.add('incorrect-answer');
+                        valMsg.textContent = `✗ Incorrect. Correct: ${correctVal}`;
+                        valMsg.className = 'validation-message incorrect-message';
+                        valMsg.style.display = 'block';
+                    }
+                } else {
+                    card.classList.add('incorrect-answer');
+                    valMsg.textContent = `✗ Unanswered. Correct: ${correctVal}`;
+                    valMsg.className = 'validation-message incorrect-message';
+                    valMsg.style.display = 'block';
+                }
+            }
+            return score;
+        }
+
+        // Calculate and present final score modal
+        function calculateResult() {
+            const mcqScore = checkGrammarMCQ();
+            const gapsScore = checkGrammarGaps();
+            const buildScore = checkSentenceBuilders();
+            const readingTFScore = checkReadingTF();
+
+            const totalScore = mcqScore + gapsScore + buildScore + readingTFScore;
+            document.getElementById('total-score').textContent = totalScore;
+
+            let level = "";
+            let desc = "";
+
+            if (totalScore < 15) {
+                level = "A1 Level";
+                desc = "You have a solid foundation in basic English, but struggle with past tenses, modal verbs, and complex sentences. We suggest starting with A1/A2 courses.";
+            } else if (totalScore >= 15 && totalScore < 28) {
+                level = "A2 Level";
+                desc = "Excellent! You can understand routine tasks, basic past narratives, and express future goals accurately. You are well-placed in the A2 syllabus.";
+            } else {
+                level = "A2+ Level";
+                desc = "Splendid job! You display high competence with modal verbs, comparative/superlative structures, and complex sentence assembly. Ready for B1 transition!";
+            }
+
+            document.getElementById('rec-level').textContent = level;
+            document.getElementById('rec-desc').textContent = desc;
+
+            // Show results modal
+            document.getElementById('result-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('result-modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
